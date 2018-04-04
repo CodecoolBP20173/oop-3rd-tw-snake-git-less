@@ -2,6 +2,7 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
+import com.codecool.snake.entities.powerups.HealthRestorePowerUp;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.event.ActionEvent;
@@ -26,9 +27,10 @@ public class Game extends Pane {
 
     public void restart() {
         this.getChildren().clear();
-        Globals.gameObjects = new LinkedList<>();
-        Globals.newGameObjects = new LinkedList<>();
-        Globals.oldGameObjects = new LinkedList<>();
+        Globals.gameObjects.clear();
+        Globals.newGameObjects.clear();
+        Globals.oldGameObjects.clear();
+        Globals.gameLoop.stop();
         this.start();
         initGame();
         buildUi(this.primaryStage);
@@ -60,6 +62,8 @@ public class Game extends Pane {
         new SimplePowerup(this);
         new SimplePowerup(this);
         new SimplePowerup(this);
+
+        new HealthRestorePowerUp(this);
     }
 
 
