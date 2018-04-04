@@ -5,6 +5,7 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.powerups.HealthRestorePowerUp;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
@@ -14,9 +15,11 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
+    private Pane pane;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
+        this.pane = pane;
         setX(xc);
         setY(yc);
         health = 100;
@@ -37,7 +40,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
         // set rotation and position
         setRotate(dir);
-        Point2D heading = Utils.directionToVector(dir, speed, false, "x");
+        Point2D heading = Utils.directionToVector(dir, speed);
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
 
@@ -57,6 +60,15 @@ public class SnakeHead extends GameEntity implements Animatable {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
         }
+        createPowerups();
+    }
+
+    public void createPowerups() {
+        int randomNumber = Utils.createRandomNumber(1, 400);
+        if (randomNumber == 2 && Globals.healthRestorePowerUp == null) {
+            Globals.healthRestorePowerUp = new HealthRestorePowerUp(pane);
+        }
+
     }
 
     public void addPart(int numParts) {

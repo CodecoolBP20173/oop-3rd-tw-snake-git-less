@@ -22,6 +22,9 @@ public class HealthRestorePowerUp extends GameEntity implements Interactable, An
         Random rnd = new Random();
         setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
         setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        for (int i = 0; i < pane.getChildren().size(); i++) {
+            System.out.println(pane.getChildren().get(i));
+        }
     }
 
     @Override
@@ -36,6 +39,12 @@ public class HealthRestorePowerUp extends GameEntity implements Interactable, An
         if (this.age == 900) {
             destroy();
         }
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        Globals.healthRestorePowerUp = null;
     }
 
     @Override
