@@ -1,6 +1,7 @@
 package com.codecool.snake.entities.snakes;
 
 import com.codecool.snake.Game;
+import com.codecool.snake.GameLoop;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
@@ -10,6 +11,8 @@ import com.codecool.snake.entities.powerups.HealthRestorePowerUp;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
+import javax.swing.*;
+
 public class SnakeHead extends GameEntity implements Animatable {
 
     private static final float speed = 2;
@@ -17,6 +20,7 @@ public class SnakeHead extends GameEntity implements Animatable {
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
     private Pane pane;
+    public static int snakeLength;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -27,6 +31,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         tail = this;
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
+        snakeLength = 0;
 
         addPart(4);
     }
@@ -60,6 +65,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
             Globals.gameLoop.stop();
+            JOptionPane.showMessageDialog(null, "       Game Over! \n Your length was: " + SnakeHead.snakeLength);
         }
         createPowerups();
     }
@@ -76,6 +82,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         for (int i = 0; i < numParts; i++) {
             SnakeBody newPart = new SnakeBody(pane, tail);
             tail = newPart;
+            snakeLength++;
         }
     }
 
