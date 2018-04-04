@@ -24,9 +24,10 @@ public class Game extends Pane {
 
     public void restart() {
         this.getChildren().clear();
-        Globals.gameObjects = new LinkedList<>();
-        Globals.newGameObjects = new LinkedList<>();
-        Globals.oldGameObjects = new LinkedList<>();
+        Globals.gameObjects.clear();
+        Globals.newGameObjects.clear();
+        Globals.oldGameObjects.clear();
+        Globals.gameLoop.stop();
         this.start();
         initGame();
         buildUi(this.primaryStage);
