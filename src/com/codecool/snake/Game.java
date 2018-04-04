@@ -44,7 +44,6 @@ public class Game extends Pane {
         int dialogResult = JOptionPane.showConfirmDialog(null, "Would You Like to restart the game?", "Restart!", dialogButton);
         if (dialogResult == JOptionPane.YES_OPTION) {
             this.restart();
-
         }
 
     }
