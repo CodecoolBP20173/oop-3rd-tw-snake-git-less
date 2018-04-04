@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.snakes;
 
+import com.codecool.snake.Game;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
@@ -83,6 +84,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (health > 100) {
             health = 100;
         }
+        Game.healthLabel.setText("Health: " + health);
         System.out.println(health);
     }
 }
