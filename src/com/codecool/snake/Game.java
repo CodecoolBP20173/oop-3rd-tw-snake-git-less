@@ -13,10 +13,12 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.util.LinkedList;
+import javafx.scene.control.Label;
 
 public class Game extends Pane {
 
     Stage primaryStage = null;
+    public static Label healthLabel = new Label("Health: 100");
 
     public Game() {
         initGame();
@@ -70,10 +72,14 @@ public class Game extends Pane {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                Game.healthLabel.setText("Health: 100");
                 restartPopup("GG", "GG", primaryStage);
             }
         });
 
+        healthLabel.setLayoutX(5);
+        healthLabel.setLayoutY(25);
+        this.getChildren().add(healthLabel);
         this.getChildren().add(button);
 
     }
