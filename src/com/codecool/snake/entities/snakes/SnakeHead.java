@@ -37,7 +37,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
         // set rotation and position
         setRotate(dir);
-        Point2D heading = Utils.directionToVector(dir, speed);
+        Point2D heading = Utils.directionToVector(dir, speed, false, "x");
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
 
@@ -68,5 +68,9 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void changeHealth(int diff) {
         health += diff;
+        if (health > 100) {
+            health = 100;
+        }
+        System.out.println(health);
     }
 }
