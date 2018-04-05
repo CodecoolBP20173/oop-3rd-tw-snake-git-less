@@ -28,6 +28,8 @@ public class SnakeHead extends GameEntity implements Animatable {
     public static int snakeLength;
     public boolean isphase = false;
     private int phaseTimer = 0;
+    private double coordinateX;
+    private double coordinateY;
     private static Interactable[] firstSnakeBody = new Interactable[4];
     public static int bodyCounter = 0;
     public static boolean gotYourTail = false;
@@ -47,6 +49,8 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
     public void step() {
+        this.coordinateX = getX();
+        this.coordinateY = getY();
         double dir = getRotate();
         if (Globals.leftKeyDown) {
             dir = dir - turnRate;
@@ -100,8 +104,8 @@ public class SnakeHead extends GameEntity implements Animatable {
 
         // check for game over condition
 
-        createPowerups();
-        createEnemies();
+        createPowerups(coordinateX, coordinateY);
+        createEnemies(coordinateX, coordinateY);
     }
 
     public void phase(){
@@ -130,28 +134,26 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     }
 
-    public void createPowerups() {
+    public void createPowerups(double X, double Y) {
         int randomNumber = Utils.createRandomNumber(1, 1000);
         if ((randomNumber == 2 || randomNumber == 3) && Globals.healthRestorePowerUp == null) {
-            Globals.healthRestorePowerUp = new HealthRestorePowerUp(pane);
+            Globals.healthRestorePowerUp = new HealthRestorePowerUp(pane, X, Y);
         }
-
         if (randomNumber > 85 && randomNumber < 90) {
-            new SimplePowerup(pane);
+            new SimplePowerup(pane, X, Y);
         }
-      
         if (randomNumber == 3 && Globals.phasePowerUp == null) {
-            Globals.phasePowerUp = new PhasePowerUp(pane);
+            Globals.phasePowerUp = new PhasePowerUp(pane, X, Y);
         }
     }
 
-    public void createEnemies() {
+    public void createEnemies(double X, double Y) {
         int randomNumber = Utils.createRandomNumber(1, 1000);
         if (randomNumber > 35 && randomNumber < 40) {
-            new Clown(pane);
+            new Clown(pane, X, Y);
         }
         if (randomNumber == 2) {
-            new SimpleEnemy(pane);
+            new SimpleEnemy(pane, X, Y);
         }
     }
 

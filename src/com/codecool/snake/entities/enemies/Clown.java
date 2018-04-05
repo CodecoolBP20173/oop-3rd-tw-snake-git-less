@@ -11,8 +11,8 @@ import javafx.scene.layout.Pane;
 public class Clown extends Enemy implements Animatable, Interactable {
     private int age = 0;
 
-    public Clown(Pane pane) {
-        super(pane);
+    public Clown(Pane pane, double X, double Y) {
+        super(pane, X, Y);
         setImage(Globals.enemyClown);
         damage = 15;
         speed = 1.8f;

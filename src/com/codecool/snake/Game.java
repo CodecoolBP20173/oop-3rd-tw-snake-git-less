@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.util.LinkedList;
+import java.util.Random;
+
 import javafx.scene.control.Label;
 
 public class Game extends Pane {
@@ -50,16 +52,9 @@ public class Game extends Pane {
     public void initGame() {
         new SnakeHead(this, 500, 500);
 
+        new SimplePowerup(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
 
-        new SimpleEnemy(this);
-
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-
-        new HealthRestorePowerUp(this);
-        new PhasePowerUp(this);
+        new PhasePowerUp(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
     }
 
 
