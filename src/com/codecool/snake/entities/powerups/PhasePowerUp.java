@@ -1,5 +1,6 @@
 package com.codecool.snake.entities.powerups;
 
+import com.codecool.snake.Game;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
@@ -30,6 +31,7 @@ public class PhasePowerUp extends GameEntity implements Interactable, Animatable
     @Override
     public void apply(SnakeHead snakeHead) {
         snakeHead.isphase = true;
+        Game.powerUpLabel.setVisible(true);
         destroy();
     }
 

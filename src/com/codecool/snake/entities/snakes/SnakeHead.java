@@ -75,7 +75,10 @@ public class SnakeHead extends GameEntity implements Animatable {
         } else {
             phase();
             this.phaseTimer++;
+            int time = (600-phaseTimer)/60;
+            Game.powerUpLabel.setText("Phase time: " + time);
             if (this.phaseTimer == 600) {
+                Game.powerUpLabel.setVisible(false);
                 System.out.println("phase time is over");
                 isphase = false;
                 phaseTimer =0;

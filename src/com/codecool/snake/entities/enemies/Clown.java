@@ -25,7 +25,6 @@ public class Clown extends Enemy implements Animatable, Interactable {
         double Y = 0;
         if (this.isOutOfBounds()) {
             int wall = this.whichWallTouched();
-            System.out.println(wall);
             switch (wall) {
                 case 0: Y = 700;
                         X = getX();
