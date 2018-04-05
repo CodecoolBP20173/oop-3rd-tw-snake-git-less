@@ -3,6 +3,7 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.HealthRestorePowerUp;
+import com.codecool.snake.entities.powerups.PhasePowerUp;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.event.ActionEvent;
@@ -63,6 +64,7 @@ public class Game extends Pane {
         new SimplePowerup(this);
 
         new HealthRestorePowerUp(this);
+        new PhasePowerUp(this);
     }
 
 

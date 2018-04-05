@@ -8,6 +8,7 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.powerups.HealthRestorePowerUp;
+import com.codecool.snake.entities.powerups.PhasePowerUp;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
@@ -21,6 +22,8 @@ public class SnakeHead extends GameEntity implements Animatable {
     private int health;
     private Pane pane;
     public static int snakeLength;
+    public boolean isphase = false;
+    private int phaseTimer = 0;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -60,20 +63,62 @@ public class SnakeHead extends GameEntity implements Animatable {
                 }
             }
         }
+        if (!isphase){
+            if (isOutOfBounds() || health <= 0) {
+                System.out.println("Game Over");
+                Globals.gameLoop.stop();
+                JOptionPane.showMessageDialog(null, "       Game Over! \n Your length was: " + SnakeHead.snakeLength);
+            }
+        } else {
+            phase();
+            this.phaseTimer++;
+            if (this.phaseTimer == 600) {
+                System.out.println("phase time is over");
+                isphase = false;
+                phaseTimer =0;
+            }
+
+        }
+
 
         // check for game over condition
-        if (isOutOfBounds() || health <= 0) {
-            System.out.println("Game Over");
-            Globals.gameLoop.stop();
-            JOptionPane.showMessageDialog(null, "       Game Over! \n Your length was: " + SnakeHead.snakeLength);
-        }
+
         createPowerups();
+    }
+
+    public void phase(){
+        if (getX() > Globals.WINDOW_WIDTH){
+            setX(0);
+            setY(getY());
+
+        }
+
+        if (getX() < 0) {
+            setX(Globals.WINDOW_WIDTH);
+            setY(getY());
+
+        }
+        if (getY() > Globals.WINDOW_HEIGHT){
+            setX(getX());
+            setY(0);
+
+
+        }
+        if (getY() <0) {
+            setX(getX());
+            setY(Globals.WINDOW_HEIGHT);
+
+        }
+
     }
 
     public void createPowerups() {
         int randomNumber = Utils.createRandomNumber(1, 400);
         if (randomNumber == 2 && Globals.healthRestorePowerUp == null) {
             Globals.healthRestorePowerUp = new HealthRestorePowerUp(pane);
+        }
+        if (randomNumber == 3 && Globals.phasePowerUp == null) {
+            Globals.phasePowerUp = new PhasePowerUp(pane);
         }
 
     }

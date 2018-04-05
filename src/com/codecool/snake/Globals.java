@@ -2,6 +2,7 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.powerups.HealthRestorePowerUp;
+import com.codecool.snake.entities.powerups.PhasePowerUp;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
 
@@ -20,6 +21,7 @@ public class Globals {
     public static Image simpleEnemy = new Image("simple_enemy.png");
     public static Image powerupBerry = new Image("powerup_berry.png");
     public static Image powerupMedkit = new Image("medkit.png");
+    public static Image powerupPhase = new Image("ghost.png");
     //.. put here the other images you want to use
 
     public static boolean leftKeyDown;
@@ -30,6 +32,7 @@ public class Globals {
     public static GameLoop gameLoop;
 
     public static HealthRestorePowerUp healthRestorePowerUp = null;
+    public static PhasePowerUp phasePowerUp = null;
 
     static {
         gameObjects = new LinkedList<>();

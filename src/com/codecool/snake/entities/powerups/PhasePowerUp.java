@@ -11,12 +11,12 @@ import java.util.TimerTask;
 
 import java.util.Random;
 
-public class HealthRestorePowerUp extends GameEntity implements Interactable, Animatable {
+public class PhasePowerUp extends GameEntity implements Interactable, Animatable {
     private int age = 0;
 
-    public HealthRestorePowerUp(Pane pane) {
+    public PhasePowerUp(Pane pane) {
         super(pane);
-        setImage(Globals.powerupMedkit);
+        setImage(Globals.powerupPhase);
         pane.getChildren().add(this);
 
         Random rnd = new Random();
@@ -29,7 +29,7 @@ public class HealthRestorePowerUp extends GameEntity implements Interactable, An
 
     @Override
     public void apply(SnakeHead snakeHead) {
-        snakeHead.changeHealth(100);
+        snakeHead.isphase = true;
         destroy();
     }
 
@@ -44,11 +44,11 @@ public class HealthRestorePowerUp extends GameEntity implements Interactable, An
     @Override
     public void destroy() {
         super.destroy();
-        Globals.healthRestorePowerUp = null;
+        Globals.phasePowerUp = null;
     }
 
     @Override
     public String getMessage() {
-        return "Now you are healthy as fuck!";
+        return "Now you are a ghost, spoooky!";
     }
 }
