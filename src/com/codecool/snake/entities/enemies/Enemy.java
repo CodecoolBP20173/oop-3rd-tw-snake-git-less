@@ -16,13 +16,22 @@ public abstract class Enemy extends GameEntity implements Animatable, Interactab
     protected double direction;
     protected float speed;
 
-    public Enemy(Pane pane) {
+    public Enemy(Pane pane, double X, double Y) {
         super(pane);
         Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
+        double coordinateX = rnd.nextDouble() * Globals.WINDOW_WIDTH;
+        double coordinateY = rnd.nextDouble() * Globals.WINDOW_HEIGHT;
+        if (coordinateX >= X -50 && coordinateX <= X + 50) {
+            coordinateX = GameEntity.adjustCoordinate(coordinateX, true);
+        }
+        if (coordinateY >= Y -50 && coordinateY <= Y + 50) {
+            coordinateY = GameEntity.adjustCoordinate(coordinateY, false);
+        }
+        setX(coordinateX);
+        setY(coordinateY);
         pane.getChildren().add(this);
         this.direction = rnd.nextDouble() * 360;
         setRotate(this.direction);
     }
+
 }

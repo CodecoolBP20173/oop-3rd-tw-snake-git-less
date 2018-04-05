@@ -9,13 +9,14 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
+import java.util.Date;
 import java.util.Random;
 
 public class SimpleEnemy extends Enemy implements Animatable, Interactable {
     private int age = 0;
 
-    public SimpleEnemy(Pane pane) {
-        super(pane);
+    public SimpleEnemy(Pane pane, double X, double Y) {
+        super(pane, X, Y);
         setImage(Globals.simpleEnemy);
         damage = 10;
         speed = 1;

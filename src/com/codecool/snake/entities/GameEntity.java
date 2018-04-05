@@ -30,6 +30,20 @@ public abstract class GameEntity extends ImageView {
         return false;
     }
 
+    public static double adjustCoordinate(double generated, boolean isX) {
+        int maxLong;
+        if (isX) {
+            maxLong = 1000;
+        } else {
+            maxLong = 700;
+        }
+        generated += 100;
+        if (generated >= maxLong) {
+            generated -= maxLong;
+        }
+        return generated;
+    }
+
     protected int whichWallTouched() {
         /** Gives back the direction of the touched wall in int, like:
          * Top - 0

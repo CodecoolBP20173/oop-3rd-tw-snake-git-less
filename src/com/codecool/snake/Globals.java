@@ -20,7 +20,7 @@ public class Globals {
     public static final double WINDOW_WIDTH = 1000;
     public static final double WINDOW_HEIGHT = 700;
 
-    public static Image snakeHead = new Image("snake_head.png");
+    public static Image snakeHead = new Image("freddie.png");
     public static Image snakeBodyGreen = new Image("snake_body_green.png");
     public static Image snakeBodyRed = new Image("snake_body_red.png");
     public static Image simpleEnemy = new Image("simple_enemy.png");
