@@ -73,6 +73,8 @@ public class Game extends Pane {
                 Game.healthLabel.setText("Health: 100");
                 SnakeHead.gotYourTail = false;
                 SnakeHead.bodyCounter = 0;
+                SnakeHead.points = 0;
+                SnakeHead.pointsToDisplay = 0;
                 restartPopup("GG", "GG", primaryStage);
             }
         });

@@ -33,8 +33,8 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static Interactable[] firstSnakeBody = new Interactable[4];
     public static int bodyCounter = 0;
     public static boolean gotYourTail = false;
-    private static float points = 0;
-    private static int pointsToDisplay = 0;
+    public static float points = 0;
+    public static int pointsToDisplay = 0;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
