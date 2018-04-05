@@ -21,7 +21,7 @@ import java.util.Arrays;
 public class SnakeHead extends GameEntity implements Animatable {
 
     private static float speed = 2;
-    private static final float turnRate = 2;
+    private static final float turnRate = 4;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
     private Pane pane;
@@ -150,7 +150,7 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     public void createEnemies(double X, double Y) {
         int randomNumber = Utils.createRandomNumber(1, 1000);
-        if (randomNumber > 35 && randomNumber < 40) {
+        if (randomNumber > 37 && randomNumber < 40) {
             new Clown(pane, X, Y);
         }
         if (randomNumber == 2) {
