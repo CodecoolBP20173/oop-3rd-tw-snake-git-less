@@ -155,9 +155,9 @@ public class SnakeHead extends GameEntity implements Animatable {
             new Clown(pane, X, Y);
         }
         if (randomNumber == 2) {
-            new SimpleEnemy(pane);
-            new RandomMoveEnemy(pane);
-            new RandomMoveEnemy(pane);
+            new SimpleEnemy(pane, X, Y);
+            new RandomMoveEnemy(pane, X, Y);
+            new RandomMoveEnemy(pane, X, Y);
             new SimpleEnemy(pane, X, Y);
         }
     }
