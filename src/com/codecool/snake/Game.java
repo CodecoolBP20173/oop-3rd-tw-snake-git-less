@@ -56,7 +56,16 @@ public class Game extends Pane {
     public void initGame() {
         new SnakeHead(this, 500, 500);
         new SimplePowerup(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
+        new SimplePowerup(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
+
         new PhasePowerUp(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
+
+        new SimpleEnemy(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
+        new SimpleEnemy(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
+
+        new Clown(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
+
+
         sound.startMusic();
     }
 
