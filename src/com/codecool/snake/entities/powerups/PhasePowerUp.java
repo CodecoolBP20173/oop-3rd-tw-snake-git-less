@@ -14,17 +14,21 @@ import java.util.Random;
 public class PhasePowerUp extends GameEntity implements Interactable, Animatable {
     private int age = 0;
 
-    public PhasePowerUp(Pane pane) {
+    public PhasePowerUp(Pane pane, double X, double Y) {
         super(pane);
         setImage(Globals.powerupPhase);
-        pane.getChildren().add(this);
-
         Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
-        for (int i = 0; i < pane.getChildren().size(); i++) {
-            //System.out.println(pane.getChildren().get(i));
+        double coordinateX = rnd.nextDouble() * Globals.WINDOW_WIDTH;
+        double coordinateY = rnd.nextDouble() * Globals.WINDOW_HEIGHT;
+        if (coordinateX >= X -50 && coordinateX <= X + 50) {
+            coordinateX = GameEntity.adjustCoordinate(coordinateX, true);
         }
+        if (coordinateY >= Y -50 && coordinateY <= Y + 50) {
+            coordinateY = GameEntity.adjustCoordinate(coordinateY, false);
+        }
+        setX(coordinateX);
+        setY(coordinateY);
+        pane.getChildren().add(this);
     }
 
     @Override
