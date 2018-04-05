@@ -4,7 +4,6 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.Sound;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Animatable;
-import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
@@ -46,6 +45,10 @@ public class Clown extends Enemy implements Animatable, Interactable {
         }
         setX(X + heading.getX());
         setY(Y + heading.getY());
+        this.age++;
+        if (this.age == 1800) {
+            destroy();
+        }
     }
 
     @Override

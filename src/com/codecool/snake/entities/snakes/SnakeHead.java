@@ -1,7 +1,6 @@
 package com.codecool.snake.entities.snakes;
 
 import com.codecool.snake.Game;
-import com.codecool.snake.GameLoop;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
@@ -45,7 +44,6 @@ public class SnakeHead extends GameEntity implements Animatable {
         setImage(Globals.snakeHead);
         pane.getChildren().add(this);
         snakeLength = 0;
-
         addPart(4);
     }
 
@@ -100,12 +98,8 @@ public class SnakeHead extends GameEntity implements Animatable {
                 phaseTimer =0;
                 gotYourTail = false;
             }
-
         }
-
-
         // check for game over condition
-
         createPowerups(coordinateX, coordinateY);
         createEnemies(coordinateX, coordinateY);
     }
@@ -114,26 +108,19 @@ public class SnakeHead extends GameEntity implements Animatable {
         if (getX() > Globals.WINDOW_WIDTH){
             setX(0);
             setY(getY());
-
         }
-
         if (getX() < 0) {
             setX(Globals.WINDOW_WIDTH);
             setY(getY());
-
         }
         if (getY() > Globals.WINDOW_HEIGHT){
             setX(getX());
             setY(0);
-
-
         }
         if (getY() <0) {
             setX(getX());
             setY(Globals.WINDOW_HEIGHT);
-
         }
-
     }
 
     public void createPowerups(double X, double Y) {
@@ -156,9 +143,9 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
         if (randomNumber == 2) {
             new SimpleEnemy(pane, X, Y);
+        }
+        if (randomNumber == 456) {
             new RandomMoveEnemy(pane, X, Y);
-            new RandomMoveEnemy(pane, X, Y);
-            new SimpleEnemy(pane, X, Y);
         }
     }
 

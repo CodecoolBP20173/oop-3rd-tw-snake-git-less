@@ -93,5 +93,4 @@ public abstract class Enemy extends GameEntity implements Animatable, Interactab
 
         }
     }
-
 }

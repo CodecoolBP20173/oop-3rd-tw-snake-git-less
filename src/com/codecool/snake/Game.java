@@ -1,11 +1,7 @@
 package com.codecool.snake;
 
-import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.Clown;
-import com.codecool.snake.entities.enemies.RandomMoveEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
-import com.codecool.snake.entities.powerups.HealthRestorePowerUp;
-import com.codecool.snake.entities.powerups.PhasePowerUp;
 import com.codecool.snake.entities.powerups.SimplePowerup;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.event.ActionEvent;
@@ -14,10 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import javax.swing.*;
-import java.util.LinkedList;
-import java.util.Random;
 
 import javafx.scene.control.Label;
 
@@ -55,20 +48,17 @@ public class Game extends Pane {
 
     public void initGame() {
         new SnakeHead(this, 500, 500);
-        new SimplePowerup(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
-        new SimplePowerup(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
 
-        new PhasePowerUp(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
+        new SimplePowerup(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
+        new SimplePowerup(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
 
         new SimpleEnemy(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
         new SimpleEnemy(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
 
         new Clown(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
 
-
         sound.startMusic();
     }
-
 
     public void buildUi(Stage primaryStage){
         if(this.primaryStage == null){
@@ -94,7 +84,6 @@ public class Game extends Pane {
         this.getChildren().add(powerUpLabel);
         powerUpLabel.setVisible(false);
         this.getChildren().add(button);
-
     }
 
     public void start() {

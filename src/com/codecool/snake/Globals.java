@@ -3,13 +3,7 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.powerups.HealthRestorePowerUp;
 import com.codecool.snake.entities.powerups.PhasePowerUp;
-import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import java.io.File;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,8 +17,8 @@ public class Globals {
     public static Image snakeHead = new Image("freddie.png");
     public static Image snakeBodyGreen = new Image("snake_body_green.png");
     public static Image snakeBodyRed = new Image("snake_body_red.png");
-    public static Image simpleEnemy = new Image("simple_enemy.png");
-    public static Image powerupBerry = new Image("burger.png");
+    public static Image simpleEnemy = new Image("bug.png");
+    public static Image burger = new Image("burger.png");
     public static Image powerupMedkit = new Image("medkit.png");
     public static Image enemyClown = new Image("clown.png");
     public static Image powerupPhase = new Image("ghost.png");
@@ -54,7 +48,6 @@ public class Globals {
     public static void removeGameObject(GameEntity toRemove) {
         oldGameObjects.add(toRemove);
     }
-
 
     public static List<GameEntity> getGameObjects() {
         return Collections.unmodifiableList(gameObjects);

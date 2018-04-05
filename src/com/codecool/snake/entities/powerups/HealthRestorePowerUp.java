@@ -6,8 +6,6 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import java.util.Random;
 
@@ -29,7 +27,6 @@ public class HealthRestorePowerUp extends GameEntity implements Interactable, An
         }
         setX(coordinateX);
         setY(coordinateY);
-
     }
 
     @Override
