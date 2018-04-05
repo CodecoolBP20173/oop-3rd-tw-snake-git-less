@@ -73,6 +73,8 @@ public class Game extends Pane {
             @Override
             public void handle(ActionEvent event) {
                 Game.healthLabel.setText("Health: 100");
+                SnakeHead.gotYourTail = false;
+                SnakeHead.bodyCounter = 0;
                 restartPopup("GG", "GG", primaryStage);
             }
         });
