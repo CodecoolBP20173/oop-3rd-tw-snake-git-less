@@ -16,11 +16,18 @@ public class SnakeBody extends GameEntity implements Animatable {
     private GameEntity parent;
     private Queue<Vec2d> history = new LinkedList<>();
     private static final int historySize = 10;
+    private static boolean isGreen = true;
 
     public SnakeBody(Pane pane, GameEntity parent) {
         super(pane);
         this.parent = parent;
-        setImage(Globals.snakeBody);
+        if (isGreen) {
+            setImage(Globals.snakeBodyRed);
+            isGreen = false;
+        } else {
+            setImage(Globals.snakeBodyGreen);
+            isGreen = true;
+        }
 
         // place it visually below the current tail
         List<Node> children = pane.getChildren();
@@ -41,5 +48,4 @@ public class SnakeBody extends GameEntity implements Animatable {
         setY(pos.y);
         history.add(new Vec2d(parent.getX(), parent.getY())); // add the parent's current position to the beginning of the history
     }
-
 }

@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.enemies.Clown;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.HealthRestorePowerUp;
 import com.codecool.snake.entities.powerups.PhasePowerUp;
@@ -35,9 +36,6 @@ public class Game extends Pane {
         this.start();
         initGame();
         buildUi(this.primaryStage);
-
-
-
     }
 
     void restartPopup(String infoMessage, String titleBar, Stage stage) {
@@ -46,16 +44,12 @@ public class Game extends Pane {
         if (dialogResult == JOptionPane.YES_OPTION) {
             this.restart();
         }
-
     }
-
 
     public void initGame() {
         new SnakeHead(this, 500, 500);
 
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
-        new SimpleEnemy(this);
+
         new SimpleEnemy(this);
 
         new SimplePowerup(this);
