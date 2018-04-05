@@ -27,6 +27,7 @@ public class RandomMoveEnemy  extends Enemy implements Animatable, Interactable 
         if(this.age % 250 == 0) {
             this.direction = random.nextDouble() * 360;
             heading = Utils.directionToVector(direction, speed);
+            speed = Utils.createRandomNumber(1, 4);
         }
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
