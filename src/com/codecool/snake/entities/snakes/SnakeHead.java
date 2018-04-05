@@ -11,6 +11,7 @@ import com.codecool.snake.entities.enemies.Clown;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.HealthRestorePowerUp;
 import com.codecool.snake.entities.powerups.SimplePowerup;
+import com.codecool.snake.entities.powerups.PhasePowerUp;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
@@ -24,6 +25,8 @@ public class SnakeHead extends GameEntity implements Animatable {
     private int health;
     private Pane pane;
     public static int snakeLength;
+    public boolean isphase = false;
+    private int phaseTimer = 0;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -63,15 +66,54 @@ public class SnakeHead extends GameEntity implements Animatable {
                 }
             }
         }
+        if (!isphase){
+            if (isOutOfBounds() || health <= 0) {
+                System.out.println("Game Over");
+                Globals.gameLoop.stop();
+                JOptionPane.showMessageDialog(null, "       Game Over! \n Your length was: " + SnakeHead.snakeLength);
+            }
+        } else {
+            phase();
+            this.phaseTimer++;
+            if (this.phaseTimer == 600) {
+                System.out.println("phase time is over");
+                isphase = false;
+                phaseTimer =0;
+            }
+
+        }
+
 
         // check for game over condition
-        if (isOutOfBounds() || health <= 0) {
-            System.out.println("Game Over");
-            Globals.gameLoop.stop();
-            JOptionPane.showMessageDialog(null, "       Game Over! \n Your length was: " + SnakeHead.snakeLength);
-        }
+
         createPowerups();
         createEnemies();
+    }
+
+    public void phase(){
+        if (getX() > Globals.WINDOW_WIDTH){
+            setX(0);
+            setY(getY());
+
+        }
+
+        if (getX() < 0) {
+            setX(Globals.WINDOW_WIDTH);
+            setY(getY());
+
+        }
+        if (getY() > Globals.WINDOW_HEIGHT){
+            setX(getX());
+            setY(0);
+
+
+        }
+        if (getY() <0) {
+            setX(getX());
+            setY(Globals.WINDOW_HEIGHT);
+
+        }
+
     }
 
     public void createPowerups() {
@@ -79,8 +121,13 @@ public class SnakeHead extends GameEntity implements Animatable {
         if ((randomNumber == 2 || randomNumber == 3) && Globals.healthRestorePowerUp == null) {
             Globals.healthRestorePowerUp = new HealthRestorePowerUp(pane);
         }
+
         if (randomNumber > 85 && randomNumber < 90) {
             new SimplePowerup(pane);
+        }
+      
+        if (randomNumber == 3 && Globals.phasePowerUp == null) {
+            Globals.phasePowerUp = new PhasePowerUp(pane);
         }
     }
 
