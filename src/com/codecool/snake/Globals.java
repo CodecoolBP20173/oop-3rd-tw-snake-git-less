@@ -6,6 +6,10 @@ import com.codecool.snake.entities.powerups.PhasePowerUp;
 import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.image.Image;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -50,6 +54,7 @@ public class Globals {
     public static void removeGameObject(GameEntity toRemove) {
         oldGameObjects.add(toRemove);
     }
+
 
     public static List<GameEntity> getGameObjects() {
         return Collections.unmodifiableList(gameObjects);
