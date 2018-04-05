@@ -9,13 +9,13 @@ import com.codecool.snake.entities.snakes.SnakeHead;
 import javafx.scene.layout.Pane;
 
 public class Clown extends Enemy implements Animatable, Interactable {
-    private int age;
+    private int age = 0;
 
     public Clown(Pane pane) {
         super(pane);
         setImage(Globals.enemyClown);
         damage = 15;
-        speed = 2;
+        speed = 1.8f;
         heading = Utils.directionToVector(direction, speed);
     }
 

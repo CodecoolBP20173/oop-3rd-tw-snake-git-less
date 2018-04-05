@@ -14,7 +14,7 @@ public abstract class Enemy extends GameEntity implements Animatable, Interactab
     protected Point2D heading;
     protected int damage;
     protected double direction;
-    protected int speed;
+    protected float speed;
 
     public Enemy(Pane pane) {
         super(pane);

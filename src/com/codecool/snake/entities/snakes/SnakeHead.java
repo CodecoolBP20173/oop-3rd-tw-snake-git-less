@@ -7,7 +7,10 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.enemies.Clown;
+import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.HealthRestorePowerUp;
+import com.codecool.snake.entities.powerups.SimplePowerup;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
@@ -15,7 +18,7 @@ import javax.swing.*;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
-    private static final float speed = 2;
+    private static float speed = 2;
     private static final float turnRate = 2;
     private GameEntity tail; // the last element. Needed to know where to add the next part.
     private int health;
@@ -68,14 +71,27 @@ public class SnakeHead extends GameEntity implements Animatable {
             JOptionPane.showMessageDialog(null, "       Game Over! \n Your length was: " + SnakeHead.snakeLength);
         }
         createPowerups();
+        createEnemies();
     }
 
     public void createPowerups() {
-        int randomNumber = Utils.createRandomNumber(1, 400);
-        if (randomNumber == 2 && Globals.healthRestorePowerUp == null) {
+        int randomNumber = Utils.createRandomNumber(1, 1000);
+        if ((randomNumber == 2 || randomNumber == 3) && Globals.healthRestorePowerUp == null) {
             Globals.healthRestorePowerUp = new HealthRestorePowerUp(pane);
         }
+        if (randomNumber > 85 && randomNumber < 90) {
+            new SimplePowerup(pane);
+        }
+    }
 
+    public void createEnemies() {
+        int randomNumber = Utils.createRandomNumber(1, 1000);
+        if (randomNumber > 35 && randomNumber < 40) {
+            new Clown(pane);
+        }
+        if (randomNumber == 2) {
+            new SimpleEnemy(pane);
+        }
     }
 
     public void addPart(int numParts) {
@@ -93,5 +109,9 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
         Game.healthLabel.setText("Health: " + health);
         System.out.println(health);
+    }
+
+    public void changeSpeed(float diff) {
+        speed += diff;
     }
 }
