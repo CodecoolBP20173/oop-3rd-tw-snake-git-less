@@ -17,11 +17,14 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.util.LinkedList;
+import java.util.Random;
+
 import javafx.scene.control.Label;
 
 public class Game extends Pane {
 
     Stage primaryStage = null;
+    public static Sound sound = new Sound();
     public static Label healthLabel = new Label("Health: 100");
     public static Label powerUpLabel = new Label("Power-up: ");
 
@@ -30,6 +33,7 @@ public class Game extends Pane {
     }
 
     public void restart() {
+        Game.sound.stopMusic();
         this.getChildren().clear();
         Globals.gameObjects.clear();
         Globals.newGameObjects.clear();
@@ -44,23 +48,16 @@ public class Game extends Pane {
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(null, "Would You Like to restart the game?", "Restart!", dialogButton);
         if (dialogResult == JOptionPane.YES_OPTION) {
+            Game.sound.stopMusic();
             this.restart();
         }
     }
 
     public void initGame() {
         new SnakeHead(this, 500, 500);
-
-
-        new SimpleEnemy(this);
-
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-        new SimplePowerup(this);
-
-        new HealthRestorePowerUp(this);
-        new PhasePowerUp(this);
+        new SimplePowerup(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
+        new PhasePowerUp(this, Utils.createRandomNumber(1, 1000), Utils.createRandomNumber(1, 700));
+        sound.startMusic();
     }
 
 
@@ -74,6 +71,8 @@ public class Game extends Pane {
             @Override
             public void handle(ActionEvent event) {
                 Game.healthLabel.setText("Health: 100");
+                SnakeHead.gotYourTail = false;
+                SnakeHead.bodyCounter = 0;
                 restartPopup("GG", "GG", primaryStage);
             }
         });

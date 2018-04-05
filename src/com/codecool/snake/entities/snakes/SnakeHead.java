@@ -17,6 +17,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
@@ -28,6 +29,11 @@ public class SnakeHead extends GameEntity implements Animatable {
     public static int snakeLength;
     public boolean isphase = false;
     private int phaseTimer = 0;
+    private double coordinateX;
+    private double coordinateY;
+    private static Interactable[] firstSnakeBody = new Interactable[4];
+    public static int bodyCounter = 0;
+    public static boolean gotYourTail = false;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -44,6 +50,8 @@ public class SnakeHead extends GameEntity implements Animatable {
     }
 
     public void step() {
+        this.coordinateX = getX();
+        this.coordinateY = getY();
         double dir = getRotate();
         if (Globals.leftKeyDown) {
             dir = dir - turnRate;
@@ -62,13 +70,20 @@ public class SnakeHead extends GameEntity implements Animatable {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
                 if (entity instanceof Interactable) {
                     Interactable interactable = (Interactable) entity;
-                    interactable.apply(this);
-                    System.out.println(interactable.getMessage());
+                    if (bodyCounter < 4) {
+                        firstSnakeBody[bodyCounter] = interactable;
+                        bodyCounter++;
+                    }
+                    if (!Arrays.asList(firstSnakeBody).contains(interactable)) {
+                        interactable.apply(this);
+                        System.out.println(interactable.getMessage());
+                    }
                 }
             }
         }
         if (!isphase){
-            if (isOutOfBounds() || health <= 0) {
+            if (isOutOfBounds() || health <= 0 || gotYourTail) {
+                Game.sound.stopMusic();
                 System.out.println("Game Over");
                 Globals.gameLoop.stop();
                 JOptionPane.showMessageDialog(null, "       Game Over! \n Your length was: " + SnakeHead.snakeLength);
@@ -76,13 +91,14 @@ public class SnakeHead extends GameEntity implements Animatable {
         } else {
             phase();
             this.phaseTimer++;
-            int time = (600-phaseTimer)/60;
+            int time = ((600-phaseTimer)/60) + 1;
             Game.powerUpLabel.setText("Phase time: " + time);
             if (this.phaseTimer == 600) {
                 Game.powerUpLabel.setVisible(false);
                 System.out.println("phase time is over");
                 isphase = false;
                 phaseTimer =0;
+                gotYourTail = false;
             }
 
         }
@@ -90,8 +106,8 @@ public class SnakeHead extends GameEntity implements Animatable {
 
         // check for game over condition
 
-        createPowerups();
-        createEnemies();
+        createPowerups(coordinateX, coordinateY);
+        createEnemies(coordinateX, coordinateY);
     }
 
     public void phase(){
@@ -120,30 +136,29 @@ public class SnakeHead extends GameEntity implements Animatable {
 
     }
 
-    public void createPowerups() {
+    public void createPowerups(double X, double Y) {
         int randomNumber = Utils.createRandomNumber(1, 1000);
         if ((randomNumber == 2 || randomNumber == 3) && Globals.healthRestorePowerUp == null) {
-            Globals.healthRestorePowerUp = new HealthRestorePowerUp(pane);
+            Globals.healthRestorePowerUp = new HealthRestorePowerUp(pane, X, Y);
         }
-
         if (randomNumber > 85 && randomNumber < 90) {
-            new SimplePowerup(pane);
+            new SimplePowerup(pane, X, Y);
         }
-      
         if (randomNumber == 3 && Globals.phasePowerUp == null) {
-            Globals.phasePowerUp = new PhasePowerUp(pane);
+            Globals.phasePowerUp = new PhasePowerUp(pane, X, Y);
         }
     }
 
-    public void createEnemies() {
+    public void createEnemies(double X, double Y) {
         int randomNumber = Utils.createRandomNumber(1, 1000);
         if (randomNumber > 35 && randomNumber < 40) {
-            new Clown(pane);
+            new Clown(pane, X, Y);
         }
         if (randomNumber == 2) {
             new SimpleEnemy(pane);
             new RandomMoveEnemy(pane);
             new RandomMoveEnemy(pane);
+            new SimpleEnemy(pane, X, Y);
         }
     }
 

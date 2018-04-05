@@ -1,6 +1,7 @@
 package com.codecool.snake.entities.enemies;
 
 import com.codecool.snake.Globals;
+import com.codecool.snake.Sound;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
@@ -11,8 +12,8 @@ import javafx.scene.layout.Pane;
 public class Clown extends Enemy implements Animatable, Interactable {
     private int age = 0;
 
-    public Clown(Pane pane) {
-        super(pane);
+    public Clown(Pane pane, double X, double Y) {
+        super(pane, X, Y);
         setImage(Globals.enemyClown);
         damage = 15;
         speed = 1.8f;
@@ -49,6 +50,7 @@ public class Clown extends Enemy implements Animatable, Interactable {
 
     @Override
     public void apply(SnakeHead player) {
+        Sound.playScream();
         player.changeHealth(-damage);
         destroy();
     }
