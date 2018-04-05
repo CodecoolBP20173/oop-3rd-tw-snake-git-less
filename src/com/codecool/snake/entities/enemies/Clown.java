@@ -1,6 +1,7 @@
 package com.codecool.snake.entities.enemies;
 
 import com.codecool.snake.Globals;
+import com.codecool.snake.Sound;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
@@ -53,6 +54,7 @@ public class Clown extends Enemy implements Animatable, Interactable {
 
     @Override
     public void apply(SnakeHead player) {
+        Sound.playScream();
         player.changeHealth(-damage);
         destroy();
     }

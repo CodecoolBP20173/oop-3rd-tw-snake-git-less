@@ -82,6 +82,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
         if (!isphase){
             if (isOutOfBounds() || health <= 0 || gotYourTail) {
+                Game.sound.stopMusic();
                 System.out.println("Game Over");
                 Globals.gameLoop.stop();
                 JOptionPane.showMessageDialog(null, "       Game Over! \n Your length was: " + SnakeHead.snakeLength);
