@@ -24,6 +24,7 @@ public class Game extends Pane {
 
     Stage primaryStage = null;
     public static Label healthLabel = new Label("Health: 100");
+    public static Label powerUpLabel = new Label("Power-up: ");
 
     public Game() {
         initGame();
@@ -67,13 +68,19 @@ public class Game extends Pane {
             @Override
             public void handle(ActionEvent event) {
                 Game.healthLabel.setText("Health: 100");
+                SnakeHead.gotYourTail = false;
+                SnakeHead.bodyCounter = 0;
                 restartPopup("GG", "GG", primaryStage);
             }
         });
 
         healthLabel.setLayoutX(5);
         healthLabel.setLayoutY(25);
+        powerUpLabel.setLayoutX(5);
+        powerUpLabel.setLayoutY(40);
         this.getChildren().add(healthLabel);
+        this.getChildren().add(powerUpLabel);
+        powerUpLabel.setVisible(false);
         this.getChildren().add(button);
 
     }

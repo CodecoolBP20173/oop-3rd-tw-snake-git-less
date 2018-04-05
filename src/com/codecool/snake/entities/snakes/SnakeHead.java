@@ -16,6 +16,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 public class SnakeHead extends GameEntity implements Animatable {
 
@@ -29,6 +30,9 @@ public class SnakeHead extends GameEntity implements Animatable {
     private int phaseTimer = 0;
     private double coordinateX;
     private double coordinateY;
+    private static Interactable[] firstSnakeBody = new Interactable[4];
+    public static int bodyCounter = 0;
+    public static boolean gotYourTail = false;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -65,13 +69,19 @@ public class SnakeHead extends GameEntity implements Animatable {
             if (getBoundsInParent().intersects(entity.getBoundsInParent())) {
                 if (entity instanceof Interactable) {
                     Interactable interactable = (Interactable) entity;
-                    interactable.apply(this);
-                    System.out.println(interactable.getMessage());
+                    if (bodyCounter < 4) {
+                        firstSnakeBody[bodyCounter] = interactable;
+                        bodyCounter++;
+                    }
+                    if (!Arrays.asList(firstSnakeBody).contains(interactable)) {
+                        interactable.apply(this);
+                        System.out.println(interactable.getMessage());
+                    }
                 }
             }
         }
         if (!isphase){
-            if (isOutOfBounds() || health <= 0) {
+            if (isOutOfBounds() || health <= 0 || gotYourTail) {
                 System.out.println("Game Over");
                 Globals.gameLoop.stop();
                 JOptionPane.showMessageDialog(null, "       Game Over! \n Your length was: " + SnakeHead.snakeLength);
@@ -79,10 +89,14 @@ public class SnakeHead extends GameEntity implements Animatable {
         } else {
             phase();
             this.phaseTimer++;
+            int time = ((600-phaseTimer)/60) + 1;
+            Game.powerUpLabel.setText("Phase time: " + time);
             if (this.phaseTimer == 600) {
+                Game.powerUpLabel.setVisible(false);
                 System.out.println("phase time is over");
                 isphase = false;
                 phaseTimer =0;
+                gotYourTail = false;
             }
 
         }
