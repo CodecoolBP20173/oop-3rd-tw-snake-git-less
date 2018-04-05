@@ -14,8 +14,8 @@ import java.util.Random;
 public class RandomMoveEnemy  extends Enemy implements Animatable, Interactable {
     private int age = 0;
 
-    public RandomMoveEnemy(Pane pane) {
-        super(pane);
+    public RandomMoveEnemy(Pane pane, Double X, Double Y) {
+        super(pane, X, Y);
         setImage(Globals.randomEnemy);
         damage = 10;
         speed = 1;
