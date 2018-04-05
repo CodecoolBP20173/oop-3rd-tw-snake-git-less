@@ -8,6 +8,7 @@ import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.enemies.Clown;
+import com.codecool.snake.entities.enemies.RandomMoveEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.HealthRestorePowerUp;
 import com.codecool.snake.entities.powerups.SimplePowerup;
@@ -154,6 +155,9 @@ public class SnakeHead extends GameEntity implements Animatable {
             new Clown(pane, X, Y);
         }
         if (randomNumber == 2) {
+            new SimpleEnemy(pane);
+            new RandomMoveEnemy(pane);
+            new RandomMoveEnemy(pane);
             new SimpleEnemy(pane, X, Y);
         }
     }

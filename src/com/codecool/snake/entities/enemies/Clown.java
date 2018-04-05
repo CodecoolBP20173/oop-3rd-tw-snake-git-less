@@ -28,17 +28,17 @@ public class Clown extends Enemy implements Animatable, Interactable {
             int wall = this.whichWallTouched();
             switch (wall) {
                 case 0: Y = 700;
-                        X = getX();
-                        break;
+                    X = getX();
+                    break;
                 case 90: X = 0;
-                         Y = getY();
-                         break;
+                    Y = getY();
+                    break;
                 case 180: Y = 0;
-                          X = getX();
-                          break;
+                    X = getX();
+                    break;
                 case 270: X = 1000;
-                          Y = getY();
-                          break;
+                    Y = getY();
+                    break;
             }
         } else {
             X = getX();
@@ -46,10 +46,6 @@ public class Clown extends Enemy implements Animatable, Interactable {
         }
         setX(X + heading.getX());
         setY(Y + heading.getY());
-        this.age++;
-        if (this.age == 1500) {
-            destroy();
-        }
     }
 
     @Override
