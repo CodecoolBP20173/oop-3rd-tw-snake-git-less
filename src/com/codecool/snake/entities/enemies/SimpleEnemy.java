@@ -1,44 +1,32 @@
 package com.codecool.snake.entities.enemies;
 
-import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.SnakeHead;
-import javafx.geometry.Point2D;
 import javafx.scene.layout.Pane;
 
-import java.util.Random;
+public class SimpleEnemy extends Enemy implements Animatable, Interactable {
+    private int age = 0;
 
-// a simple enemy TODO make better ones.
-public class SimpleEnemy extends GameEntity implements Animatable, Interactable {
-
-    private Point2D heading;
-    private static final int damage = 10;
-
-    public SimpleEnemy(Pane pane) {
-        super(pane);
-
+    public SimpleEnemy(Pane pane, double X, double Y) {
+        super(pane, X, Y);
         setImage(Globals.simpleEnemy);
-        pane.getChildren().add(this);
-        int speed = 1;
-        Random rnd = new Random();
-        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
-
-        double direction = rnd.nextDouble() * 360;
-        setRotate(direction);
+        damage = 10;
+        speed = 1;
         heading = Utils.directionToVector(direction, speed);
     }
 
     @Override
     public void step() {
-        if (isOutOfBounds()) {
-            destroy();
-        }
+        bounceMove();
         setX(getX() + heading.getX());
         setY(getY() + heading.getY());
+        this.age++;
+        if (this.age == 2500) {
+            destroy();
+        }
     }
 
     @Override
