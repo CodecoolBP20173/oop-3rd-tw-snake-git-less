@@ -33,6 +33,8 @@ public class SnakeHead extends GameEntity implements Animatable {
     private static Interactable[] firstSnakeBody = new Interactable[4];
     public static int bodyCounter = 0;
     public static boolean gotYourTail = false;
+    public static float points = 0;
+    public static int pointsToDisplay = 0;
 
     public SnakeHead(Pane pane, int xc, int yc) {
         super(pane);
@@ -84,7 +86,7 @@ public class SnakeHead extends GameEntity implements Animatable {
                 Game.sound.stopMusic();
                 System.out.println("Game Over");
                 Globals.gameLoop.stop();
-                JOptionPane.showMessageDialog(null, "       Game Over! \n Your length was: " + SnakeHead.snakeLength);
+                JOptionPane.showMessageDialog(null, "       Game Over! \n   Your score is: " + SnakeHead.pointsToDisplay);
             }
         } else {
             phase();
@@ -102,6 +104,7 @@ public class SnakeHead extends GameEntity implements Animatable {
         // check for game over condition
         createPowerups(coordinateX, coordinateY);
         createEnemies(coordinateX, coordinateY);
+        pointCount();
     }
 
     public void phase(){
@@ -164,6 +167,12 @@ public class SnakeHead extends GameEntity implements Animatable {
         }
         Game.healthLabel.setText("Health: " + health);
         System.out.println(health);
+    }
+
+    private void pointCount() {
+        points += 0.01;
+        pointsToDisplay = (int)points + snakeLength;
+        Game.pointsLabel.setText("Points: " + pointsToDisplay);
     }
 
     public void changeSpeed(float diff) {

@@ -20,6 +20,7 @@ public class Game extends Pane {
     public static Sound sound = new Sound();
     public static Label healthLabel = new Label("Health: 100");
     public static Label powerUpLabel = new Label("Power-up: ");
+    public static Label pointsLabel = new Label("Points: ");
 
     public Game() {
         initGame();
@@ -72,6 +73,8 @@ public class Game extends Pane {
                 Game.healthLabel.setText("Health: 100");
                 SnakeHead.gotYourTail = false;
                 SnakeHead.bodyCounter = 0;
+                SnakeHead.points = 0;
+                SnakeHead.pointsToDisplay = 0;
                 restartPopup("GG", "GG", primaryStage);
             }
         });
@@ -79,9 +82,12 @@ public class Game extends Pane {
         healthLabel.setLayoutX(5);
         healthLabel.setLayoutY(25);
         powerUpLabel.setLayoutX(5);
-        powerUpLabel.setLayoutY(40);
+        powerUpLabel.setLayoutY(55);
+        pointsLabel.setLayoutX(5);
+        pointsLabel.setLayoutY(40);
         this.getChildren().add(healthLabel);
         this.getChildren().add(powerUpLabel);
+        this.getChildren().addAll(pointsLabel);
         powerUpLabel.setVisible(false);
         this.getChildren().add(button);
     }
